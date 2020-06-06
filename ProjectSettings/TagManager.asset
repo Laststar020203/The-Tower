@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - FLOOR
+  - MANAGER
+  - MONSTER
+  - TURN
+  - FOLLOWER
+  - POINT
+  - PLAYER
+  - DEADZONE
+  - LARVAFLOOR
+  - WALL
+  - WALL2
+  - WALL3
+  - WALL4
+  - WALLC
+  - Obstacle
+  - WARPZONE
+  - FADE
+  - Ob
+  - ISBALSTONE
+  - SCENEMANAGER
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - Floor
+  - FLOOR
+  - Lava
+  - Unit
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

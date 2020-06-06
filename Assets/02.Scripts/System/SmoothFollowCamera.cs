@@ -1,0 +1,83 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SmoothFollowCamera : MonoBehaviour {
+
+   
+        Transform tr;
+
+        // The target we are following
+        [SerializeField]
+        private Transform target;
+        // The distance in the x-z plane to the target
+        [SerializeField]
+        private float distance = 10.0f;
+        // the height we want the camera to be above the target
+        [SerializeField]
+        private float height = 20.0f;
+        [SerializeField]
+        private float rotationDamping;
+        [SerializeField]
+        private float heightDamping;
+
+        public bool isStop = false;
+
+
+
+        // Use this for initialization
+        void Start()
+        {
+            tr = GetComponent<Transform>();
+        }
+        private void Update()
+        {
+            if (Manager_Yandere.instance.isdamping)
+            {
+
+                tr.position = new Vector3(-3184.17f, 84.267f, -260f);
+                tr.rotation = Quaternion.Euler(new Vector3(-0.475f, -4.607f, 0f));
+
+            }
+        }
+        // Update is called once per frame
+        void LateUpdate()
+        {
+            if (Manager_Yandere.instance.isdamping)
+            {
+
+                return;
+
+            }
+            // Early out if we don't have a target
+            if (!target)
+                return;
+
+            // Calculate the current rotation angles
+            var wantedRotationAngle = target.eulerAngles.y;
+            var wantedHeight = target.position.y + height;
+
+            var currentRotationAngle = transform.eulerAngles.y;
+            var currentHeight = transform.position.y;
+
+            // Damp the rotation around the y-axis
+            currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+
+            // Damp the height
+            currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+
+            // Convert the angle into a rotation
+            var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+            // Set the position of the camera on the x-z plane to:
+            // distance meters behind the target
+            transform.position = target.position;
+            transform.position -= currentRotation * Vector3.forward * distance;
+
+            // Set the height of the camera
+            transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
+
+            // Always look at the target
+            transform.LookAt(target);
+        }
+    }
+
